@@ -21,6 +21,7 @@ require 'torque/postgresql/inheritance'
 require 'torque/postgresql/coder'
 require 'torque/postgresql/migration'
 require 'torque/postgresql/relation'
+require 'torque/postgresql/schema_awareness'
 require 'torque/postgresql/schema_cache'
 require 'torque/postgresql/schema_dumper'
 
