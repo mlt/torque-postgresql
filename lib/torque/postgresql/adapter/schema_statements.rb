@@ -80,6 +80,15 @@ module Torque
           super table_name, **options, &block
         end
 
+        def role
+          @role ||= select_value('select current_user')
+        end
+
+        def set_role(role = nil)
+          @role = role
+          execute "set role #{role.present? ? quote(role) : 'none'}"
+        end
+
         private
 
           # This waits for the second call to really return the table definition

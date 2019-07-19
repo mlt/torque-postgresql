@@ -156,6 +156,26 @@ module Torque
           SQL
         end
 
+        def insert_fixtures_set(*_args)
+          r = Rails.configuration.respond_to?(:test_role) && Rails.configuration.test_role
+          set_role if r
+          super
+          return unless r
+
+          set_role(r)
+          ActiveRecord::Base.configurations[Rails.env]['username'] = r
+        end
+
+        def reset_pk_sequence!(*_args)
+          r = Rails.configuration.respond_to?(:test_role) && Rails.configuration.test_role
+          set_role if r
+          super
+          return unless r
+
+          set_role(r)
+          ActiveRecord::Base.configurations[Rails.env]['username'] = r
+        end
+
       end
     end
   end
