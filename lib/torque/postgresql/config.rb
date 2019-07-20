@@ -4,6 +4,7 @@ module Torque
 
     # Stores a version check for compatibility purposes
     AR521 = (ActiveRecord.gem_version >= Gem::Version.new('5.2.1'))
+    AR6   = (ActiveRecord.gem_version >= Gem::Version.new('5.99'))
 
     # Allow nested configurations
     # :TODO: Rely on +inheritable_copy+ to make nested configurations

@@ -80,9 +80,10 @@ module Torque
 
         # Get the final decorated table, regardless of any special condition
         def decorated_table_name
-          if parent < Base && !parent.abstract_class?
-            contained = parent.table_name
-            contained = contained.singularize if parent.pluralize_table_names
+          p = Torque::PostgreSQL::AR6 ? module_parent : parent
+          if p < Base && !p.abstract_class?
+            contained = p.table_name
+            contained = contained.singularize if p.pluralize_table_names
             contained += "_"
           end
 
