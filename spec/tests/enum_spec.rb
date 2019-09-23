@@ -85,7 +85,11 @@ RSpec.describe 'Enum' do
   end
 
   context 'on table definition' do
-    subject { ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.new('articles') }
+    if Torque::PostgreSQL::AR6
+      subject { ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.new(connection, 'articles') }
+    else
+      subject { ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.new('articles') }
+    end
 
     it 'has the enum method' do
       expect(subject).to respond_to(:enum)

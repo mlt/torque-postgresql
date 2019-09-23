@@ -12,6 +12,11 @@ gemfile:
   - gemfiles/Gemfile.rails-5.1
   - gemfiles/Gemfile.rails-5.2
 
+matrix:
+  include:
+    - rvm: 2.6.4
+      gemfile: gemfiles/Gemfile.rails-6.0
+
 env: DATABASE_URL=postgres://postgres@localhost/torque_postgresql_test
 
 before_script:

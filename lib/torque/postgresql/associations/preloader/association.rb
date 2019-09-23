@@ -8,7 +8,7 @@ module Torque
 
           # For reflections connected through an array, make sure to properly
           # decuple the list of ids and set them as associated with the owner
-          def run(preloader)
+          def run(preloader = nil)
             return super unless connected_through_array?
             send("run_array_for_#{@reflection.macro}")
           end

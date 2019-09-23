@@ -25,7 +25,16 @@ RSpec.describe 'Enum' do
   end
 
   context 'on table definition' do
-    subject { ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.new('articles') }
+    # subject do
+    #   args = ['articles']
+    #   args.unshift(connection) if Torque::PostgreSQL::AR6
+    #   ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.new(*args)
+    # end
+    if Torque::PostgreSQL::AR6
+      subject { ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.new(connection, 'articles') }
+    else
+      subject { ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.new('articles') }
+    end
 
     it 'can be defined as an array' do
       subject.enum(:content_status, array: true)

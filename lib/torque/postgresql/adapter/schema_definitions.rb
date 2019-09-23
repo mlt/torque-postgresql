@@ -34,14 +34,16 @@ module Torque
 
         attr_reader :inherits
 
-        def initialize(name, *_, **options)
-          old_args = []
-          old_args << options.delete(:temporary) || false
-          old_args << options.delete(:options)
-          old_args << options.delete(:as)
-          comment = options.delete(:comment)
-
-          super(name, *old_args, comment: comment)
+        def initialize(*args, **options)
+          if Torque::PostgreSQL::AR6
+            super(*args, options)
+          else
+            args << options.delete(:temporary) || false
+            args << options.delete(:options)
+            args << options.delete(:as)
+            comment = options.delete(:comment)
+            super(*args, comment: comment)
+          end
 
           if options.key?(:inherits)
             @inherits = Array[options.delete(:inherits)].flatten.compact

@@ -85,6 +85,7 @@ module Torque
           # This waits for the second call to really return the table definition
           def create_table_definition(*args, **options) # :nodoc:
             if !args.second.kind_of?(TableDefinition)
+              args.unshift(self) if Torque::PostgreSQL::AR6
               TableDefinition.new(*args, **options)
             else
               args.second

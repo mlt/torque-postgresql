@@ -27,8 +27,8 @@ RSpec.describe 'TableInheritance' do
       result << '"id" (big)?serial primary key'
       result << ', "title" character varying'
       result << ', "active" boolean'
-      result << ', "created_at" timestamp NOT NULL'
-      result << ', "updated_at" timestamp NOT NULL'
+      result << ', "created_at" timestamp(\(6\))? NOT NULL'
+      result << ', "updated_at" timestamp(\(6\))? NOT NULL'
       result << '\)'
       expect(sql).to match(/#{result}/)
     end
@@ -277,8 +277,8 @@ RSpec.describe 'TableInheritance' do
 
       it 'does not mess with single table inheritance' do
         result = 'SELECT "authors".* FROM "authors"'
-        result << " WHERE \"authors\".\"type\" IN ('AuthorJournalist')"
-        expect(other.all.to_sql).to eql(result)
+        result << " WHERE \"authors\".\"type\" (IN \\('AuthorJournalist'\\)|= 'AuthorJournalist')"
+        expect(other.all.to_sql).to match(/#{result}/)
       end
 
       it 'adds all statements to load all the necessary records' do

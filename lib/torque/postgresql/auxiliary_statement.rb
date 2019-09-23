@@ -208,6 +208,7 @@ module Torque
             if association.respond_to?(:join_scope)
               args = [@query.arel_table]
               args << base if association.method(:join_scope).arity.eql?(2)
+              args << foreign_table << association.klass if association.method(:join_scope).arity.eql?(3)
               @query.merge(association.join_scope(*args))
             end
 
