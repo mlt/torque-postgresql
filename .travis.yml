@@ -1,16 +1,16 @@
 sudo: false
 language: ruby
 cache: bundler
-rvm:
-- 2.3.4
-- 2.4.4
-- 2.5.1
-
-gemfile:
-  - Gemfile
-  - gemfiles/Gemfile.rails-5.0
-  - gemfiles/Gemfile.rails-5.1
-  - gemfiles/Gemfile.rails-5.2
+# rvm:
+# - 2.3.4
+# - 2.4.4
+# - 2.5.1
+#
+# gemfile:
+#   - Gemfile
+#   - gemfiles/Gemfile.rails-5.0
+#   - gemfiles/Gemfile.rails-5.1
+#   - gemfiles/Gemfile.rails-5.2
 
 matrix:
   include:
