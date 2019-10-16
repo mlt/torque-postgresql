@@ -9,7 +9,6 @@ module Torque
                                    .map(&:table_name)
                                    # .map { |c| quote_table_name c.table_name }
         tt = tables_only(tt)
-        byebug
         begin
           transaction(requires_new: true) do
             execute(tt.collect { |name| "ALTER TABLE #{name} DISABLE TRIGGER ALL" }.join(";"))
